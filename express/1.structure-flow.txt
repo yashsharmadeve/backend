@@ -1,0 +1,45 @@
+project/
+│
+├── src/
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── controllers/
+│   │   └── user.controller.js
+│   │
+│   ├── routes/
+│   │   └── user.routes.js
+│   │
+│   ├── services/
+│   │   └── user.service.js
+│   │
+│   ├── middlewares/
+│   │   └── auth.middleware.js
+│   │
+│   ├── models/
+│   │   └── user.model.js
+│   │
+│   ├── utils/ -- reusable functions like formatDate, generateJwtToken
+│   │   └── logger.js
+│   │
+│   ├── app.js
+│   └── server.js
+│
+├── .env
+├── package.json
+└── README.md
+
+
+Client Request
+      ↓
+Routes - define endpoints
+      ↓
+Middleware - authentication, validation, logging
+      ↓
+Controller - handles req/res
+      ↓
+Service - business logic
+      ↓
+Database / External API - Model → database schema/query
+      ↓
+Response
