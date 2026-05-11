@@ -1,0 +1,54 @@
+It can:
+- modify request/response
+- validate data
+- authenticate users
+- log requests
+- handle errors
+
+
+Client Request
+     ↓
+Middleware
+     ↓
+Route Handler
+     ↓
+Response
+
+Types of Middleware 
+1. Built-in
+2. Third-party
+3. Custom
+
+1. Built In
+app.use(express.json()); // without this -- req.body === undefined
+
+2. Third party
+app.use(cors());
+
+3. Custom
+
+3.1 -- Route Middleware
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Unauthorized"
+    });
+  }
+
+  next();
+};
+app.get("/profile", authMiddleware, (req, res) => {
+  res.send("Private Profile");
+});
+
+
+3.2 -- custom Middleware - It runs for every incoming request and logs request information.
+const loggerMiddleware = (req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+
+  next();
+};
+
+app.use(loggerMiddleware);
