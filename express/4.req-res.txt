@@ -1,0 +1,64 @@
+1. Request Method - client requests
+
+req.method
+req.url
+req.params
+req.query
+req.body
+req.headers
+
+2. Response Method - server sends response
+res.send()
+res.json()
+res.status()
+res.end()
+
+1. res.send() -- Used to send:
+string
+HTML
+object
+array
+buffer
+2. res.json() -- for json data
+3. res.status() - for status send
+res.status().send();
+4. res.send() -to end immediately
+
+
+Flow ---------
+Client
+  ↓
+HTTP Request
+  ↓
+Node.js Server
+  ↓
+Express App
+  ↓
+Middleware
+  ↓
+Authentication
+  ↓
+Validation
+  ↓
+Route Handler / Controller
+  ↓
+Database/API Calls
+  ↓
+Response Sent
+  ↓
+Client Receives Response
+
+
+Lifecylce summary -----
+1. Client sends request
+2. Node.js receives request
+3. Express wraps req/res
+4. Middleware chain starts
+5. Route matched
+6. Controller executes
+7. Database/API calls
+8. Response sent
+9. Connection completes
+
+What is next() ? --------
+next() passes control to the next middleware.
