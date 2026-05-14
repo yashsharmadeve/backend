@@ -1,0 +1,41 @@
+// check app.js
+
+1. Route Handler 
+app.use((req,res,next)=> { // run on route issue
+    res.status(404).json({message: "Route not found"});
+})
+
+2. Custom Error
+app.use((err, req, res, next) => {
+  res.status(400).json({
+    success: false,
+    message: err.message
+  });
+});
+
+// Production Level
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || "error";
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message
+  });
+});
+
+3. Async Error Handling
+// utils/catchAsync.js
+const catchAsync = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+// Usage in route
+const getUser = catchAsync(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) throw new AppError('User not found', 404);
+  res.json(user);
+});
+
+
+In express 5 don't need async error handling express takes care of it

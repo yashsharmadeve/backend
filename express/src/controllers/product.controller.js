@@ -10,3 +10,7 @@ exports.getProduct = async (req, res) => {
   }
   res.json({id, query});
 };
+
+exports.getNewProduct = async (req, res) => {
+  res.json({message: "New Product"});
+}
